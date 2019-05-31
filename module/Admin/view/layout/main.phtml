@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <!-- //360 6.X 以上可识别 -->
+    <meta name="force-rendering" content="webkit">
+    <!-- //其他双核可识别 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script language="javascript">
+        function myBrowser() {
+            var e = navigator.userAgent.toLowerCase();
+            var g = /msie [\d.]+/gi;
+            var b = /firefox\/[\d.]+/gi;
+            var a = /chrome\/[\d.]+/gi;
+            var d = /safari\/[\d.]+/gi;
+            var f = "";
+            var c = false;
+            if (e.indexOf("msie") > 0) {
+                f = e.match(g).toString();
+                c = true;
+            } else {
+                if (e.indexOf("firefox") > 0) {
+                    c = false;
+                    f = e.match(b).toString();
+                }
+                if (e.indexOf("chrome") > 0) {
+                    c = false;
+                    f = e.match(a).toString();
+                }
+                if (e.indexOf("safari") > 0 && e.indexOf("chrome") < 0) {
+                    c = false;
+                    f = e.match(d).toString();
+                }
+                if ("" == f) {
+                    c = true;
+                    f = "ie6.0";
+                }
+                if (f == "ie6.0") {
+                    if (isIE11()) {
+                        f = "ie11.0";
+                    }
+                }
+            }
+            return {ret: c, ver: (f + "").replace(/[^0-9.]/ig, "")};
+        }
+
+        function isIE11() {
+            if (!!window.ActiveXObject || "ActiveXObject" in window) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        var browInfo = myBrowser();
+        if (browInfo.ret && browInfo.ver < 9) {
+            window.top.location.href = "/html/common/iealert.html";
+        }
+        /* 判断当前页面是否在iframe中  */
+        if (top != self) {
+            window.top.location.href = "/admin";
+        }
+    </script>
+    <link rel="stylesheet" href="/css/commonCss/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/base.css">
+</head>
+<body v-cloak>
+<?php echo $this->content; ?>
+<script src="/js/commonJs/jquery.min.js"></script>
+<script src="/js/commonJs/bootstrap.min.js"></script>
+<script src="/js/commonJs/underscore-min.js"></script>
+<script src="/js/commonJs/vue/vue.js"></script>
+<script src="/js/commonJs/vue/vue-resource.min.js"></script>
+<script src="/js/commonJs/vue/vue-router.js"></script>
+<script src="/js/base.js"></script>
+<script src="/js/component/animation.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>

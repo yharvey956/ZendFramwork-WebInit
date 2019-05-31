@@ -1,0 +1,57 @@
+<script>
+    //从PHP获取相应的权限路由信息
+    var navArr = <?php echo json_encode($this->nav);?>;
+</script>
+<div id="main">
+    <div class="main-left">
+        <div class="main-left-title" v-text="msg"></div>
+        <div class="main-left-nav">
+            <ul class="left-nav-menu">
+                <li class="left-nav-item">
+                    <a href="#/admin/index/home" class="nav-link" :class="{'active':currentNav == ''}"
+                       @click="currentNav = ''">
+                        <i class="fa fa-laptop fa-fw"></i>
+                        <span>首页</span>
+                    </a>
+                </li>
+                <li class="left-nav-item" v-for="value in webNavList">
+                    <template v-if="value.childnode && value.childnode.length > 0">
+                        <a @click="showNav(value)" class="nav-link"
+                           :class="{'active':currentNav.attrid == value.attrid}" :id="value.attrid">
+                            <i class="fa fa-fw" :class="[value.icon]"></i>
+                            <span v-text="value.name"></span>
+                        </a>
+                    </template>
+                    <template v-if="!value.childnode || value.childnode.length == 0">
+                        <a @click="currentNav = value" class="nav-link"
+                           :class="{'active':currentNav.attrid == value.attrid}" :href="'#'+ value.url" :id="value.attrid">
+                            <i class="fa fa-fw" :class="[value.icon]"></i>
+                            <span v-text="value.name"></span>
+                        </a>
+                    </template>
+                    <collapse-transition>
+                        <ul class="left-nav-sub-menu" v-show="value.childnode && value.childnode.length > 0 && value.show">
+                            <li>
+                                <a v-for="item in value.childnode" :href="'#'+ item.url" class="nav-link"
+                                   :class="{'active':currentNav.attrid == item.attrid}" @click="currentNav = item" :id="item.attrid">
+                                    <i class="fa fa-fw" :class="[item.icon]"></i>
+                                    <span v-text="item.name"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </collapse-transition>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-right">
+        <div class="main-right-header">
+            <span>右顶部</span>
+        </div>
+        <div class="main-right-content">
+            <keep-alive>
+                <router-view></router-view>
+            </keep-alive>
+        </div>
+    </div>
+</div>

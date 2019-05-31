@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col">
+        <div class="browser-window">
+            <div class="top-bar">
+                <div class="circles">
+                    <div id="close-circle" class="circle"></div>
+                    <div id="minimize-circle" class="circle"></div>
+                    <div id="maximize-circle" class="circle"></div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div id="site-layout-example-top" class="col">
+                        <p class="caption-uppercase">内部服务器错误</p>
+                    </div>
+                    <div id="site-layout-example-right" class="col">
+                        <div class="row">
+                            <h1 class="text-long-shadow col">500</h1>
+                        </div>
+                        <div class="row">
+                            <p class="col">可能原因:服务器发生错误,页面生成失败,请联系管理员！</p>
+                            <p class="col" id="back"> <a href="/admin" class="btn waves-effect waves-light">首页</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php if(isset($this->exception)): ?>
+    <dl>
+        <dt>File:</dt>
+        <dd>
+            <pre><?= $this->exception->getFile() ?>:<?= $this->exception->getLine() ?></pre>
+        </dd>
+        <dt>Message:</dt>
+        <dd>
+            <pre><?= $this->escapeHtml($this->exception->getMessage()) ?></pre>
+        </dd>
+    </dl>
+<?php endif;?>

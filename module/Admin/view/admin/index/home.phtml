@@ -1,0 +1,32 @@
+<div>
+    首页
+    <p class="desc" v-text="msg"></p>
+    <button type="button" class="btn btn-primary" @click="btnClick">获取数据</button>
+    <p v-if="dataObject != ''">{{dataObject}}</p>
+</div>
+<script>
+    docexport = {
+        data: function () {
+            return {
+                msg: "这里是首页",
+                dataObject:""
+            };
+        },
+        mounted: function () {
+            this.msg += "!!!!";
+        },
+        methods: {
+            btnClick: function () {
+                this.$http.post("/admin/index/getdata", {}).then(function (data) {
+                    this.msg = data.body.msg;
+                    this.dataObject = data.body.data
+                });
+            }
+        }
+    };
+</script>
+<style>
+    .desc {
+        font-size: 14px;
+    }
+</style>
