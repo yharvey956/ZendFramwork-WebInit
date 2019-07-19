@@ -13,8 +13,8 @@
 使用
     
         git clone https://github.com/yharvey956/ZendFramwork-WebInit
-	cd ZendFramwork-WebInit
-	composer install
-	composer dump-autoload
-	配置nginx 访问public index.php
-	浏览器访问 
+        cd ZendFramwork-WebInit
+        composer install
+        composer dump-autoload
+        配置nginx 访问public index.php
+        浏览器访问 
